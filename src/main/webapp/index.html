@@ -1,0 +1,45 @@
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<title>支付页面</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="utf-8" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="bookmark" href="/favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrapper">
+	<form method="post" action="javascript:createOrder();">
+		<div>
+			<label for="price">订单金额：</label>
+			<input type="text" name="price" id="price" />
+		</div>
+		<div>
+			<p>支付方式：</p>
+			<label><input type="radio" name="type" value="1" checked="checked" style="float:left; display:inline; margin:12px 12px 0 0;"> <span class="pic"><img src="/payPage/weixin.jpg"></span></label><br>
+			<label><input type="radio" name="type" value="2" style="float:left; display:inline; margin:12px 12px 0 0;"> <span class="pic"><img src="/payPage/alipay.jpg"></span></label>
+		</div><br>
+
+		<input type="submit" value="立即支付" />
+	</form>
+</div>
+
+
+<script>
+	function createOrder() {
+		$.post("/createOrder","param=ck&type="+$("input[name='type']:checked").val()+"&price="+$("#price").val(),function (data) {
+			if (data.code == '1'){
+				window.location.href = '/payPage/pay.html?orderId=' + data.data.orderId;
+			} else {
+				alert("创建订单失败：" + data.msg);
+			}
+		});
+	}
+</script>
+</body>
+</html>

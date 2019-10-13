@@ -1,0 +1,7 @@
+server.port: 8081
+
+#PayCK配置
+payck:
+  url: http://localhost:8080/
+  key: 649fb2bdb31d24a43a9e3530dad4cf82
+  return.url: http://localhost:8081/success.html
